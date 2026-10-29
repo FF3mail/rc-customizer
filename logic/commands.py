@@ -5,6 +5,9 @@ from __future__ import annotations
 import shlex
 from dataclasses import dataclass
 
+# Путь после install.sh (не symlink — иначе старые версии ломали SCRIPT_DIR)
+INSTALLED_CUSTOMIZE = "/usr/local/src/Full_customize_GROK/customize_roundcube.sh"
+
 
 @dataclass
 class CustomizeOptions:
@@ -27,7 +30,7 @@ def to_remote_argv(argv: list[str]) -> str:
 
 
 def build_customize_argv(opts: CustomizeOptions) -> list[str]:
-    argv: list[str] = ["customize_roundcube"]
+    argv: list[str] = ["bash", INSTALLED_CUSTOMIZE]
     pairs: list[tuple[str, str | None]] = [
         ("--logo", opts.logo_remote),
         ("--background", opts.background_remote),
@@ -50,11 +53,11 @@ def build_customize_argv(opts: CustomizeOptions) -> list[str]:
 
 
 def build_test_argv() -> list[str]:
-    return ["customize_roundcube", "--test"]
+    return ["bash", INSTALLED_CUSTOMIZE, "--test"]
 
 
 def build_rollback_argv() -> list[str]:
-    return ["customize_roundcube", "--rollback", "--yes"]
+    return ["bash", INSTALLED_CUSTOMIZE, "--rollback", "--yes"]
 
 
 def build_install_shell_argv() -> list[str]:

@@ -11,7 +11,8 @@ def test_to_remote_argv_quotes_spaces() -> None:
 def test_build_customize_argv_minimal() -> None:
     opts = CustomizeOptions(text="Почта", dry_run=True)
     assert build_customize_argv(opts) == [
-        "customize_roundcube",
+        "bash",
+        "/usr/local/src/Full_customize_GROK/customize_roundcube.sh",
         "--text",
         "Почта",
         "--dry-run",

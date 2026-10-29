@@ -27,7 +27,8 @@ def test_run_test_argv(ssh: MagicMock) -> None:
     events: list[tuple[str, str]] = []
     workflows.run_test(ssh, events.append)
     assert ssh.run_command_collect.call_args_list[0][0][0] == [
-        "customize_roundcube",
+        "bash",
+        "/usr/local/src/Full_customize_GROK/customize_roundcube.sh",
         "--test",
     ]
 
@@ -38,7 +39,11 @@ def test_run_install_sequence(ssh: MagicMock) -> None:
     argv_calls = [c[0][0] for c in ssh.run_command_collect.call_args_list]
     assert ["rm", "-rf", "/tmp/Full_customize_GROK"] in argv_calls
     assert ["bash", "/tmp/Full_customize_GROK/install.sh"] in argv_calls
-    assert ["customize_roundcube", "--test"] in argv_calls
+    assert [
+        "bash",
+        "/usr/local/src/Full_customize_GROK/customize_roundcube.sh",
+        "--test",
+    ] in argv_calls
     ssh.upload_tree.assert_called_once()
 
 
@@ -46,7 +51,8 @@ def test_run_rollback_argv(ssh: MagicMock) -> None:
     events: list[tuple[str, str]] = []
     workflows.run_rollback(ssh, events.append)
     assert ssh.run_command_collect.call_args_list[-1][0][0] == [
-        "customize_roundcube",
+        "bash",
+        "/usr/local/src/Full_customize_GROK/customize_roundcube.sh",
         "--rollback",
         "--yes",
     ]
