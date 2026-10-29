@@ -6,7 +6,10 @@ a = Analysis(
     ['main.py'],
     pathex=[],
     binaries=[],
-    datas=[('resources/Full_customize_GROK', 'resources/Full_customize_GROK')],
+    datas=[
+        ('resources/Full_customize_GROK', 'resources/Full_customize_GROK'),
+        ('rc-customizer.ico', '.'),
+    ],
     hiddenimports=[],
     hookspath=[],
     hooksconfig={},
@@ -39,4 +42,5 @@ exe = EXE(
     target_arch=None,
     codesign_identity=None,
     entitlements_file=None,
+    icon='rc-customizer.ico',
 )

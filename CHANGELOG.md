@@ -1,5 +1,10 @@
 # Changelog
 
+## v1.0.1 (2026-10-29)
+
+- Иконка **rc-customizer.ico** в `RCCustomizer.exe` (файл в проводнике) и в заголовке окна.
+- Сборка через `build.spec` (единый spec с `icon=`).
+
 ## v1.0.0 (2026-10-29)
 
 - Первый публичный релиз **RCCustomizer.exe** (Windows 10+, onefile).

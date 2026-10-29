@@ -3,8 +3,10 @@
 from __future__ import annotations
 
 import queue
+import sys
 import threading
 import tkinter as tk
+from pathlib import Path
 from tkinter import messagebox, ttk
 from typing import Any, Callable
 
@@ -30,6 +32,7 @@ class App(tk.Tk):
         self.title("RC Customizer — Full_customize_GROK")
         self.geometry("800x640")
         self.minsize(720, 560)
+        self._set_window_icon()
 
         style = ttk.Style()
         style.configure("Invalid.TEntry", fieldbackground="#ffdddd")
@@ -62,6 +65,19 @@ class App(tk.Tk):
         self.protocol("WM_DELETE_WINDOW", self.on_close)
         threading.excepthook = self._thread_excepthook
         self.after(100, self._poll_queue)
+
+    def _set_window_icon(self) -> None:
+        meipass = getattr(sys, "_MEIPASS", None)
+        if meipass:
+            icon_path = Path(meipass) / "rc-customizer.ico"
+        else:
+            icon_path = Path(__file__).resolve().parent.parent / "rc-customizer.ico"
+        if not icon_path.is_file():
+            return
+        try:
+            self.iconbitmap(str(icon_path))
+        except tk.TclError:
+            pass
 
     def _thread_excepthook(self, args: threading.ExceptHookArgs) -> None:
         self.event_queue.put(
