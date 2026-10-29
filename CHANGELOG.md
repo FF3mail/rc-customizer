@@ -1,5 +1,12 @@
 # Changelog
 
+## v1.0.0 (2026-10-29)
+
+- Первый публичный релиз **RCCustomizer.exe** (Windows 10+, onefile).
+- GUI: SSH/SFTP, установка, кастомизация, откат, удаление (русский интерфейс).
+- В bundle: **Full_customize_GROK** с CLI `--rollback` / `uninstall.sh --yes` и исправлением пути `lib/` через symlink.
+- Удалённые команды вызывают `bash /usr/local/src/Full_customize_GROK/customize_roundcube.sh` (стабильно до и после обновления на сервере).
+
 ## CLI extensions (Full_customize_GROK)
 
 ### customize_roundcube.sh
